@@ -3,7 +3,7 @@
 session_start();
 
 // Database connection setup
-include_once('Database/koneksi.php'); // Include the correct path to your connection file
+include_once('database/koneksi.php'); // Include the correct path to your connection file
 
 // Check if user is already logged in
 if (isset($_SESSION['user_id'])) {
