@@ -56,7 +56,7 @@
                         <li class="side-nav-title side-nav-item">Navigation</li>
 
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <a data-bs-toggle="collapse" href="?page=dashboard" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span> Dashboards </span>
                             </a>
@@ -76,16 +76,16 @@
                             <div class="collapse" id="sidebarProjects">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="">Customer</a>
+                                        <a href="?page=customer">Customer</a>
                                     </li>
                                     <li>
-                                        <a href="">Part Project</a>
+                                        <a href="?page=part-project">Part Project</a>
                                     </li>
                                     <li>
-                                        <a href="">Proses </a>
+                                        <a href="?page=proses">Proses</a>
                                     </li>
                                     <li>
-                                        <a href="">Trial & Report</a>
+                                        <a href="?page=trial-report">Trial & Report</a>
                                     </li>
                                 </ul>
                             </div>
