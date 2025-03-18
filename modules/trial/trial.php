@@ -1,5 +1,5 @@
 <?php
-include_once('../database/koneksi.php');
+include_once('../../database/koneksi.php');
 session_start();
 
 // Handle delete operation
@@ -243,13 +243,13 @@ if (isset($_GET['detail'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
-    <link rel="shortcut icon" href="../assets/images/favicon.ico">
-    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+    <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+    <link href="../../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
     <!-- Quill css -->
     <!-- Quill css -->
-    <link href="../assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/vendor/quill.core.css" rel="stylesheet" type="text/css" />
+    <link href="../../assets/css/vendor/quill.snow.css" rel="stylesheet" type="text/css" />
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 
@@ -1713,8 +1713,8 @@ if (form) {
 
 </div>
 </div>
-<script src="../assets/js/vendor.min.js"></script>
-<script src="../assets/js/app.min.js"></script>
+<script src="../../assets/js/vendor.min.js"></script>
+<script src="../../assets/js/app.min.js"></script>
 <!-- <script src="assets/js/vendor/quill.min.js"></script>
 <script src="assets/js/pages/demo.quilljs.js"></script> -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
