@@ -7,7 +7,7 @@ include_once('database/koneksi.php'); // Include the correct path to your connec
 
 // Check if user is already logged in
 if (isset($_SESSION['user_id'])) {
-    header("Location: View/dashboard/view.php"); // Redirect to dashboard if already logged in
+    header("Location: View/index.php"); // Redirect to dashboard if already logged in
     exit();
 }
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $_SESSION['username'] = $user['username'];
 
                 // Redirect to dashboard after successful login
-                header("Location: View/dashboard/view.php");
+                header("Location: View/index.php");
                 exit();
             } else {
                 $error = "Invalid password!";
