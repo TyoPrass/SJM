@@ -56,7 +56,7 @@
                         <li class="side-nav-title side-nav-item">Navigation</li>
 
                         <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="?page=dashboard" aria-expanded="false" aria-controls="sidebarDashboards" class="side-nav-link">
+                            <a href="?page=dashboard" class="side-nav-link">
                                 <i class="uil-home-alt"></i>
                                 <span> Dashboards </span>
                             </a>
@@ -240,6 +240,15 @@
             </div>
 
             <!-- Start Content -->
+            
+
+
+
+
+
+
+
+
 
             <!-- Start content -->
 
