@@ -76,16 +76,16 @@
                             <div class="collapse" id="sidebarProjects">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="apps-projects-list.html">Customer</a>
+                                        <a href="">Customer</a>
                                     </li>
                                     <li>
-                                        <a href="apps-projects-details.html">Part Project</a>
+                                        <a href="">Part Project</a>
                                     </li>
                                     <li>
-                                        <a href="apps-projects-gantt.html">Proses </a>
+                                        <a href="">Proses </a>
                                     </li>
                                     <li>
-                                        <a href="apps-projects-add.html">Trial & Report</a>
+                                        <a href="">Trial & Report</a>
                                     </li>
                                 </ul>
                             </div>

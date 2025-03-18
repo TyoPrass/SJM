@@ -1,64 +1,58 @@
 <?php
-// Start the session
+// Database connection setup
+include_once('../database/koneksi.php'); // Include the correct path to your connection file
+
 session_start();
 
-// Database connection setup
-include_once('database/koneksi.php'); // Include the correct path to your connection file
-
-// Check if user is already logged in
-if (isset($_SESSION['user_id'])) {
-    header("Location: View/dashboard/view.php"); // Redirect to dashboard if already logged in
-    exit();
-}
-
-// Process login
+// Proses registrasi
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Collect user input
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Validate input
-    if (empty($username) || empty($password)) {
-        $error = "Username and password cannot be empty!";
+    // Validasi password
+    if (empty($password)) {
+        $error = "Password tidak boleh kosong!";
     } else {
-        // Prepare and execute the SQL statement
+        // Cek apakah username sudah digunakan
         $sql = "SELECT * FROM user WHERE username = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Check if the user exists
         if ($result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            // Verify the password
-            if (password_verify($password, $user['password'])) {
-                // Set session variables
-                $_SESSION['user_id'] = $user['id']; // Assuming 'id' is the primary key
-                $_SESSION['username'] = $user['username'];
-
-                // Redirect to dashboard after successful login
-                header("Location: View/dashboard/view.php");
+            // Jika username sudah ada
+            $error = "Username sudah digunakan, silakan pilih username lain!";
+        } else {
+            // Jika username belum digunakan, simpan data baru ke database
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash password
+            $sql_insert = "INSERT INTO user (username, password) VALUES (?, ?)";
+            $stmt_insert = $conn->prepare($sql_insert);
+            $stmt_insert->bind_param("ss", $username, $hashed_password);
+            if ($stmt_insert->execute()) {
+                // Redirect ke login setelah registrasi berhasil
+                header("Location: ../index.php");
                 exit();
             } else {
-                $error = "Invalid password!";
+                $error = "Terjadi kesalahan, coba lagi nanti!";
             }
-        } else {
-            $error = "Username not found!";
         }
     }
 }
 ?>
-<a href="../"></a>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>PE STAMPING ENGINEERING - Login</title>
+    <title>PE STAMPING ENGINEERING - Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-    <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <link rel="shortcut icon" href="../assets/images/favicon.ico">
+    <link href="../assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style"/>
 </head>
 <body class="loading authentication-bg" data-layout-config='{"darkMode":false}'>
 
@@ -68,19 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-xxl-4 col-lg-5">
                 <div class="card">
                     <div class="card-header pt-4 pb-4 text-center bg-primary">
-                        <a href="login.php">
-                            <span><img src="assets/images/logo.png" alt="" height="18"></span>
+                        <a href="register.php">
+                            <span><img src="../assets/images/logo.png" alt="" height="18"></span>
                         </a>
                     </div>
 
                     <div class="card-body p-4">
                         <div class="text-center w-75 m-auto">
-                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign In</h4>
-                            <p class="text-muted mb-4">Enter your credentials to access your account.</p>
+                            <h4 class="text-dark-50 text-center pb-0 fw-bold">Sign Up</h4>
+                            <p class="text-muted mb-4">Enter your details to create an account.</p>
                         </div>
 
-                        <!-- Form Login -->
-                        <form action="index.php" method="POST">
+                        <!-- Form Register -->
+                        <form action="register.php" method="POST">
                             <?php if (isset($error)): ?>
                                 <div class="alert alert-danger"><?= $error; ?></div>
                             <?php endif; ?>
@@ -101,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
 
                             <div class="mb-3 mb-0 text-center">
-                                <button class="btn btn-primary" type="submit"> Login </button>
+                                <button class="btn btn-primary" type="submit"> Register </button>
                             </div>
                         </form>
                     </div> <!-- end card-body -->
@@ -110,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="row mt-3">
                     <div class="col-12 text-center">
-                        <p class="text-muted">Don't have an account? <a href="View/register.php" class="text-muted ms-1"><b>Sign Up</b></a></p>
+                        <p class="text-muted">Already have an account? <a href="../index.php" class="text-muted ms-1"><b>Sign In</b></a></p>
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->
@@ -124,11 +118,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!-- end page -->
 
 <footer class="footer footer-alt">
-    2018 - <script>document.write(new Date().getFullYear())</script> © PE STAMPING
+    2018 - <script>document.write(new Date().getFullYear())</script> © PE.com
 </footer>
 
-<script src="assets/js/vendor.min.js"></script>
-<script src="assets/js/app.min.js"></script>
+<script src="../assets/js/vendor.min.js"></script>
+<script src="../assets/js/app.min.js"></script>
 
 </body>
 </html>
